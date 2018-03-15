@@ -1,6 +1,9 @@
 package ui;
 
+import adapters.CircleAdapter;
+import adapters.LineAdapter;
 import adapters.RectangleAdapter;
+import adapters.TriangleAdapter;
 import drawing.IShape;
 import drawing.SavedShapes;
 import javafx.application.Application;
@@ -20,8 +23,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import shapes.Circle;
+import shapes.Line;
 import shapes.Rectangle;
+import shapes.Triangle;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -123,22 +130,20 @@ public class MainStage extends Application {
             public void handle(MouseEvent event) {
                 if(toggleSelection.getSelectedToggle() != null){
                     ToggleButton toggleButton = (ToggleButton) toggleSelection.getSelectedToggle();
-                    IShape drawing;
-
+                    IShape drawing = null;
                     if(toggleButton.getText() == "Rectangle"){
                         drawing = new RectangleAdapter(new Rectangle(event.getX(), event.getY(),50,50,thicknessSlider.getValue(), colorPicker.getValue()),fillCheckBox.isSelected());
-                        drawing.drawShape(canvas.getGraphicsContext2D());
                     }
-                    if(toggleButton.getText() == "Circle"){
-                        drawing = new RectangleAdapter(new Rectangle(event.getX(), event.getY(),50,50,thicknessSlider.getValue(), colorPicker.getValue()),fillCheckBox.isSelected());
+                    else if(toggleButton.getText() == "Circle"){
+                        drawing = new CircleAdapter(new Circle(50,event.getX(),event.getY(),thicknessSlider.getValue(),colorPicker.getValue()),fillCheckBox.isSelected());
                     }
-                    if(toggleButton.getText() == "Triangle"){
-                        drawing = new RectangleAdapter(new Rectangle(event.getX(), event.getY(),50,50,thicknessSlider.getValue(), colorPicker.getValue()),fillCheckBox.isSelected());
+                    else if(toggleButton.getText() == "Triangle"){
+                        drawing = new TriangleAdapter(new Triangle(event.getX(),event.getY(),50,50,thicknessSlider.getValue(),colorPicker.getValue()),fillCheckBox.isSelected());
                     }
-                    if(toggleButton.getText() == "Line"){
-                        drawing = new RectangleAdapter(new Rectangle(event.getX(), event.getY(),50,50,thicknessSlider.getValue(), colorPicker.getValue()),fillCheckBox.isSelected());
+                    else if(toggleButton.getText() == "Line"){
+                        drawing = new LineAdapter(new Line(event.getX(),event.getY(),event.getX()+50,event.getY()+50,thicknessSlider.getValue(), colorPicker.getValue()),fillCheckBox.isSelected());
                     }
-
+                    drawing.drawShape(canvas.getGraphicsContext2D());
                 }
             }
         });

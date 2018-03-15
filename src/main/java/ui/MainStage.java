@@ -5,7 +5,6 @@ import adapters.LineAdapter;
 import adapters.RectangleAdapter;
 import adapters.TriangleAdapter;
 import drawing.IShape;
-import drawing.SavedShapes;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,7 +22,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import shapes.Circle;
 import shapes.Line;
@@ -159,5 +157,7 @@ public class MainStage extends Application {
         imageView.setFitWidth(15);
         return imageView;
     }
+
+
 
 }

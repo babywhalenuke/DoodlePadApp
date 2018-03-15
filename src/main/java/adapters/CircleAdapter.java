@@ -5,6 +5,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import shapes.Circle;
 
+/**
+ * This class responsible for creating an adapter that implements IShape to render a circle.
+ */
 public class CircleAdapter implements IShape {
     public static final int CIRCLE_WIDTH = 20;
     public static final int CIRCLE_HEIGHT = 20;
@@ -12,6 +15,11 @@ public class CircleAdapter implements IShape {
     private Color color;
     private boolean isFilled;
 
+    /**
+     * Constructor for CircleAdapter.
+     * @param circle
+     * @param isFilled
+     */
     public CircleAdapter(Circle circle, boolean isFilled) {
         this.circle = circle;
         this.color = circle.getColor();

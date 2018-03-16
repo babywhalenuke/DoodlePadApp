@@ -32,7 +32,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @Author Jeff Pratt
+ * @Date 3/16/2018
+ * This class responsible for main application launch and UI rendering.
+ */
 public class MainStage extends Application {
+    public static final int RECTANGLE_WIDTH = 50;
+    public static final int RECTANGLE_HEIGHT = 50;
+    public static final int RADIUS = 50;
+    public static final int TRIANGLE_WIDTH = 50;
+    public static final int TRIANGLE_LENGTH = 50;
     Scene homeScene;
     Canvas canvas;
     ToggleGroup toggleSelection;
@@ -47,7 +57,7 @@ public class MainStage extends Application {
         stage.show();
     }
 
-    public BorderPane getHomeBorderPaneWithControls(){
+    private BorderPane getHomeBorderPaneWithControls(){
         BorderPane borderPane = new BorderPane();
 
         HBox controlBar = new HBox();
@@ -60,7 +70,7 @@ public class MainStage extends Application {
 
         return borderPane;
     }
-    public List<Control> getControls(){
+    private List<Control> getControls(){
 
         ToggleGroup toggleGroup = new ToggleGroup();
         List<Control> controlList = new ArrayList<Control>();
@@ -120,7 +130,7 @@ public class MainStage extends Application {
         return controlList;
     }
 
-    public VBox getCanvas(){
+    private VBox getCanvas(){
         VBox box = new VBox();
         canvas = new Canvas(700,400);
         canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -130,13 +140,13 @@ public class MainStage extends Application {
                     ToggleButton toggleButton = (ToggleButton) toggleSelection.getSelectedToggle();
                     IShape drawing = null;
                     if(toggleButton.getText() == "Rectangle"){
-                        drawing = new RectangleAdapter(new Rectangle(event.getX(), event.getY(),50,50,thicknessSlider.getValue(), colorPicker.getValue()),fillCheckBox.isSelected());
+                        drawing = new RectangleAdapter(new Rectangle(event.getX(), event.getY(), RECTANGLE_WIDTH, RECTANGLE_HEIGHT,thicknessSlider.getValue(), colorPicker.getValue()),fillCheckBox.isSelected());
                     }
                     else if(toggleButton.getText() == "Circle"){
-                        drawing = new CircleAdapter(new Circle(50,event.getX(),event.getY(),thicknessSlider.getValue(),colorPicker.getValue()),fillCheckBox.isSelected());
+                        drawing = new CircleAdapter(new Circle(RADIUS,event.getX(),event.getY(),thicknessSlider.getValue(),colorPicker.getValue()),fillCheckBox.isSelected());
                     }
                     else if(toggleButton.getText() == "Triangle"){
-                        drawing = new TriangleAdapter(new Triangle(event.getX(),event.getY(),50,50,thicknessSlider.getValue(),colorPicker.getValue()),fillCheckBox.isSelected());
+                        drawing = new TriangleAdapter(new Triangle(event.getX(),event.getY(), TRIANGLE_WIDTH, TRIANGLE_LENGTH,thicknessSlider.getValue(),colorPicker.getValue()),fillCheckBox.isSelected());
                     }
                     else if(toggleButton.getText() == "Line"){
                         drawing = new LineAdapter(new Line(event.getX(),event.getY(),event.getX()+50,event.getY()+50,thicknessSlider.getValue(), colorPicker.getValue()),fillCheckBox.isSelected());
@@ -150,7 +160,7 @@ public class MainStage extends Application {
         return box;
     }
 
-    public ImageView getShapeImageView(String shape){
+    private ImageView getShapeImageView(String shape){
         Image image = new Image(new File("images/"+shape+".png").toURI().toString());
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(15);
